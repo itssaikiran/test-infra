@@ -16,14 +16,14 @@ terraform {
 # Provider for asia-south2 region (active)
 provider "google" {
   alias   = "asia-south2"
-  project = "cloudathon-453114"
+  project = "cloud-fusion-453613"
   region  = "asia-south2"
 }
 
 # Provider for asia-south1 region (passive)
 provider "google" {
   alias   = "asia-south1"
-  project = "cloudathon-453114"
+  project = "cloud-fusion-453613"
   region  = "asia-south1"
 }
 
