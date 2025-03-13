@@ -19,21 +19,24 @@ resource "google_container_node_pool" "active_nodes" {
   cluster    = google_container_cluster.active_cluster.name
   location   = "asia-south2-a"
   node_count = 1
+
   node_config {
     machine_type = "e2-medium"
     disk_size_gb = 20
     oauth_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
     preemptible  = true
   }
+
   management {
     auto_repair  = true
     auto_upgrade = true
   }
-  initial_node_count = 1
+
   autoscaling {
     min_node_count = 1
     max_node_count = 3
   }
+
   depends_on = [google_container_cluster.active_cluster]
 }
 
@@ -64,21 +67,24 @@ resource "google_container_node_pool" "passive_nodes" {
   cluster    = google_container_cluster.passive_cluster.name
   location   = "asia-south1-a"
   node_count = 1
+
   node_config {
     machine_type = "e2-medium"
     disk_size_gb = 20
     oauth_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
     preemptible  = true
   }
+
   management {
     auto_repair  = true
     auto_upgrade = true
   }
-  initial_node_count = 1
+
   autoscaling {
     min_node_count = 1
     max_node_count = 3
   }
+
   depends_on = [google_container_cluster.passive_cluster]
 }
 resource "google_compute_instance_group_named_port" "passive_named_port" {
