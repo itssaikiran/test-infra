@@ -12,6 +12,7 @@ resource "google_container_cluster" "active_cluster" {
   deletion_protection      = false
 }
 
+
 resource "google_container_node_pool" "active_nodes" {
   provider   = google.asia-south2
   name       = "active-node-pool"
