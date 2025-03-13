@@ -99,7 +99,7 @@ resource "google_sql_database_instance" "postgres_primary" {
   deletion_protection = false
   settings {
     tier              = "db-g1-small"
-    availability_type = "ZONAL"
+    availability_type = "REGIONAL"
     disk_size         = 10
     ip_configuration {
       ipv4_enabled = true
