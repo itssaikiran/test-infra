@@ -25,4 +25,3 @@ output "hello_world_url" {
   value       = "http://${kubernetes_service.hello_world_service_active.status[0].load_balancer[0].ingress[0].ip}"
   description = "URL to access the Hello World app"
 }
-
