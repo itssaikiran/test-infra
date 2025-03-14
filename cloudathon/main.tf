@@ -152,9 +152,9 @@ resource "google_compute_global_forwarding_rule" "gke_forwarding_rule" {
 }
 
 resource "google_compute_target_http_proxy" "gke_proxy" {
-  provider   = google.asia-south2
-  name       = "gke-http-proxy"
-  url_map    = google_compute_url_map.gke_url_map.id
+  provider = google.asia-south2
+  name     = "gke-http-proxy"
+  url_map  = google_compute_url_map.gke_url_map.id
 }
 
 resource "google_compute_url_map" "gke_url_map" {
