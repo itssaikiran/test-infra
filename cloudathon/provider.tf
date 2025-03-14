@@ -13,17 +13,17 @@ terraform {
 
 # Provider for asia-south2 region (active)
 provider "google" {
-  alias   = "asia-south2"
-  project = "cloud-fusion-453613"
-  region  = "asia-south2"
+  alias       = "asia-south2"
+  project     = "cloud-fusion-453613"
+  region      = "asia-south2"
   credentials = file("path-to-service-account-key.json") # Ensure correct path
 }
 
 # Provider for asia-south1 region (passive)
 provider "google" {
-  alias   = "asia-south1"
-  project = "cloud-fusion-453613"
-  region  = "asia-south1"
+  alias       = "asia-south1"
+  project     = "cloud-fusion-453613"
+  region      = "asia-south1"
   credentials = file("path-to-service-account-key.json") # Ensure correct path
 }
 
