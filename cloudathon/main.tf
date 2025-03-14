@@ -273,7 +273,7 @@ resource "kubernetes_service" "hello_world_service_active" {
       target_port = 80
       node_port   = 30080 # Arbitrary port between 30000-32767
     }
-    type = "NodePort" # Changed from ClusterIP
+    type = "LoadBalancer" # Changed from ClusterIP
   }
   depends_on = [
     google_container_cluster.active_cluster,
