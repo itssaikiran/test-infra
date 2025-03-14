@@ -13,19 +13,22 @@ terraform {
   }
 }
 
+# Provider for asia-south2 region (active)
 provider "google" {
-  alias       = "asia-south2"
-  project     = "cloud-fusion-453613"
-  region      = "asia-south2"
-  credentials = file("<path-to-service-account-key>.json")
+  alias   = "asia-south2"
+  project = "cloud-fusion-453613"
+  region  = "asia-south2"
 }
 
+# Provider for asia-south1 region (passive)
 provider "google" {
-  alias       = "asia-south1"
-  project     = "cloud-fusion-453613"
-  region      = "asia-south1"
-  credentials = file("<path-to-service-account-key>.json")
+  alias   = "asia-south1"
+  project = "cloud-fusion-453613"
+  region  = "asia-south1"
 }
+
+# Fetch GKE credentials dynamically
+data "google_client_config" "default" {}
 
 provider "kubernetes" {
   alias                  = "asia-south2"
