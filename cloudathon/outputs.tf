@@ -17,5 +17,12 @@ output "postgres_replica_ip" {
 }
 
 output "load_balancer_ip" {
-  value = google_compute_global_address.global_ip.address
+  value       = google_compute_global_address.global_ip.address
+  description = "Global Load Balancer IP for accessing the Hello World app."
 }
+
+output "hello_world_url" {
+  value       = "http://${google_compute_global_address.global_ip.address}"
+  description = "Use this URL to browse the Hello World app."
+}
+
