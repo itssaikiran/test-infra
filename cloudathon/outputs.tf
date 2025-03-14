@@ -17,12 +17,12 @@ output "postgres_replica_ip" {
 }
 
 output "load_balancer_ip" {
-  value       = google_compute_global_address.global_ip.address
-  description = "Global Load Balancer IP for accessing the Hello World app."
+  value       = kubernetes_service.hello_world_service_active.status[0].load_balancer[0].ingress[0].ip
+  description = "External IP of the Hello World app from Kubernetes LoadBalancer"
 }
 
 output "hello_world_url" {
-  value       = "http://${google_compute_global_address.global_ip.address}"
-  description = "Use this URL to browse the Hello World app."
+  value       = "http://${kubernetes_service.hello_world_service_active.status[0].load_balancer[0].ingress[0].ip}"
+  description = "URL to access the Hello World app"
 }
 
