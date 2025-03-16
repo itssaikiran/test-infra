@@ -8,6 +8,32 @@ on:
       - 'cloudathon/**'
 
 jobs:
+ # ✅ Checkov Scan Job
+  checkov:
+    name: Checkov Scan
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cloudathon
+
+    steps:
+      # ✅ Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # ✅ Install Checkov
+      - name: Install Checkov
+        run: |
+          pip install --upgrade pip
+          pip install checkov
+
+      # ✅ Run Checkov Scan
+      - name: Run Checkov
+        run: |
+          checkov -d . --soft-fail false \
+            --quiet \
+            --framework terraform
+            
   # ✅ SonarCloud Scan Job
   sonarcloud:
     name: SonarCloud Scan
