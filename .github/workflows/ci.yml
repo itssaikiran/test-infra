@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - '**'  # Scan all branches
+      #- hello-world  # Scan all branches
 
 permissions:
   contents: read
