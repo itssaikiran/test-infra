@@ -9,34 +9,34 @@ on:
 
 jobs:
  # ✅ Checkov Scan Job
-  checkov:
-    name: Checkov Scan
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./cloudathon
+checkov:
+  name: Checkov Scan
+  runs-on: ubuntu-latest
+  defaults:
+    run:
+      working-directory: ./cloudathon
 
-    steps:
-      # ✅ Checkout the repository
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+  steps:
+    # ✅ Checkout the repository
+    - name: Checkout Repository
+      uses: actions/checkout@v4
 
-      # ✅ Install Python (Required for Checkov)
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+    # ✅ Install Python (Required for Checkov)
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
 
-      # ✅ Install Checkov
-      - name: Install Checkov
-        run: |
-          python -m pip install --upgrade pip
-          pip install checkov
+    # ✅ Install Checkov
+    - name: Install Checkov
+      run: |
+        python -m pip install --upgrade pip
+        pip install checkov
 
-      # ✅ Run Checkov Scan (Logs will appear in workflow output)
-      - name: Run Checkov
-        run: |
-          checkov -d . --soft-fail false --framework terraform --quiet
+    # ✅ Run Checkov (Remove --quiet and enable full logging)
+    - name: Run Checkov
+      run: |
+        checkov -d . --framework terraform -o cli --soft-fail false
 
   # ✅ SonarCloud Scan Job
   sonarcloud:
