@@ -3,11 +3,11 @@ name: Terraform Plan
 on:
   push:
     branches:
-      - venkat-cloudathon-terraform-workflow
+      - hello-world
     paths:
       - 'cloudathon/**'
 
-jobs:
+jjobs:
   terraform-plan:
     name: Terraform Plan
     runs-on: ubuntu-latest
@@ -36,20 +36,5 @@ jobs:
       # Initialize Terraform with GCP provider
       - name: Terraform Init
         run: terraform init
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-
-      # Format Terraform files recursively
-      - name: Terraform Format
-        run: terraform fmt -check -recursive
-        continue-on-error: false
-
-      # Validate Terraform configuration
-      - name: Terraform Validate
-        run: terraform validate
-
-      # Generate Terraform Plan
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
