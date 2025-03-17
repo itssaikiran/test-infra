@@ -12,33 +12,38 @@ permissions:
   pull-requests: read
 
 jobs:
-  # ✅ Checkov Scan Job
-  checkov:
-    name: Checkov Scan
+  # ✅ Trivy Scan Job
+  trivy-scan:
+    name: Trivy Scan
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cloudathon
 
     steps:
       # ✅ Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # ✅ Install Python (Required for Checkov)
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      # ✅ Install Checkov
-      - name: Install Checkov
+      # ✅ Install Trivy
+      - name: Install Trivy
         run: |
-          python -m pip install --upgrade pip
-          pip install checkov
-          checkov --version
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
 
-      # ✅ Run Checkov (Enable logging and target specific framework)
-      - name: Run Checkov
+      # ✅ Run Trivy for Terraform Scanning
+      - name: Trivy Scan Terraform Files
         run: |
-          checkov -d ${{ github.workspace }}/cloudathon --framework terraform --verbose -o cli --soft-fail false
+          trivy config . --exit-code 1 --severity HIGH,CRITICAL --format table
+
+      # # ✅ Run Trivy for Docker Scanning (Optional)
+      # - name: Trivy Scan Docker Image
+      #   run: |
+      #     trivy image your-image-name:latest --exit-code 1 --severity HIGH,CRITICAL --format table
+
+      # # ✅ Run Trivy for Kubernetes Scanning (Optional)
+      # - name: Trivy Scan Kubernetes Manifests
+      #   run: |
+      #     trivy k8s cluster --report all
   # sonarcloud:
   #   name: SonarCloud Scan
   #   runs-on: ubuntu-latest
