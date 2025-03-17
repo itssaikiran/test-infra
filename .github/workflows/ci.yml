@@ -5,7 +5,8 @@ on:
     branches:
       - main
       #- hello-world  # Scan all branches
-
+    paths:
+      - 'cloudathon/**
 permissions:
   contents: read
   pull-requests: read
